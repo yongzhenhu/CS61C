@@ -21,7 +21,7 @@ main:
     beq a0, t0, next_test
     la a0, pow_string
     j failure
-
+    
 next_test:
     # inc_arr: increments "array" in place
     la a0, array
@@ -50,6 +50,8 @@ next_test:
 pow:
     # BEGIN PROLOGUE
     # FIXME: Need to save the callee saved register(s)
+    addi sp, sp, -4
+    sw s0, 0(sp)
     # END PROLOGUE
     li s0, 1
 pow_loop:
@@ -61,6 +63,8 @@ pow_end:
     mv a0, s0
     # BEGIN EPILOGUE
     # FIXME: Need to restore the callee saved register(s)
+    lw s0, 0(sp)
+    addi sp, sp, 4
     # END EPILOGUE
     jr ra
 
@@ -112,12 +116,16 @@ inc_arr_end:
 helper_fn:
     # BEGIN PROLOGUE
     # FIXME: YOUR CODE HERE
+    addi sp, sp, -4
+    sw s0, 0(sp)
     # END PROLOGUE
     lw t1, 0(a0)
     addi s0, t1, 1
     sw s0, 0(a0)
     # BEGIN EPILOGUE
     # FIXME: YOUR CODE HERE
+    lw sp, 0(sp)
+    addi sp, sp, 4
     # END EPILOGUE
     jr ra
 

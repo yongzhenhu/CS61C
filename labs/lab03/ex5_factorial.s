@@ -27,8 +27,7 @@ main:
 # The return value should be stored in a0
 factorial:
     # YOUR CODE HERE
-    mv t0, a0
-    mv t1, t0
+    mv t1, a0
     li t2, 1
     li t3, 1
 loop:
